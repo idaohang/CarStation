@@ -1,0 +1,6 @@
+<map id="gwinSliderDraw_Std" name="gwinSliderDraw_Std">
+<area shape="rect" id="node2" href="$group___g_d_i_s_p.html#ga4e182525693d4c26fa07b9027e1c4905" title="Draw a rectangular box. " alt="" coords="188,5,287,29"/>
+<area shape="rect" id="node3" href="$group___g_d_i_s_p.html#ga7ed3aeacf83e2e81fa8eba8cd565e04f" title="Draw a line. " alt="" coords="187,53,288,77"/>
+<area shape="rect" id="node4" href="$group___g_d_i_s_p.html#ga1a5dd50ec75e3ffc518c43ddd6d6da52" title="Draw a text string vertically centered within the specified box. " alt="" coords="174,101,301,125"/>
+<area shape="rect" id="node5" href="$group___g_d_i_s_p.html#ga0ee653ef83f616f3eb1cae2b247a40b1" title="Fill an area with a color. " alt="" coords="192,149,283,173"/>
+</map>
