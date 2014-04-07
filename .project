@@ -25,6 +25,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>CarStationGFX</name>
+			<type>2</type>
+			<locationURI>$%7BPROJECT_LOC%7D/ugfx/boards/CarStationGFX</locationURI>
+		</link>
+		<link>
 			<name>board</name>
 			<type>2</type>
 			<locationURI>$%7BPROJECT_LOC%7D/ChibiOS/boards/CarStation</locationURI>

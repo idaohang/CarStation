@@ -59,12 +59,16 @@ PROJECT = CarStation
 
 # Imported source files and paths
 CHIBIOS = ./ChibiOS
+GFXLIB  = ./ugfx
 include $(CHIBIOS)/boards/CarStation/board.mk
 include $(CHIBIOS)/os/hal/platforms/STM32F1xx/platform.mk
 include $(CHIBIOS)/os/hal/hal.mk
 include $(CHIBIOS)/os/ports/GCC/ARMCMx/STM32F1xx/port.mk
 include $(CHIBIOS)/os/kernel/kernel.mk
 include $(CHIBIOS)/test/test.mk
+
+include $(GFXLIB)/gfx.mk
+include $(GFXLIB)/boards/CarStationGFX/board.mk
 
 # Define linker script file here
 LDSCRIPT= $(PORTLD)/STM32F103xB.ld
@@ -77,6 +81,7 @@ CSRC = $(PORTSRC) \
        $(HALSRC) \
        $(PLATFORMSRC) \
        $(BOARDSRC) \
+       $(GFXSRC) \
        $(CHIBIOS)/os/various/evtimer.c \
        $(CHIBIOS)/os/various/syscalls.c \
        ./Src/main.c
@@ -110,6 +115,7 @@ ASMSRC = $(PORTASM)
 
 INCDIR = $(PORTINC) $(KERNINC) $(TESTINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) \
+         $(GFXINC) \
          $(CHIBIOS)/os/various
 
 #

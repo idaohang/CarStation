@@ -29,9 +29,11 @@ static msg_t Thread1(void *arg) {
   while (TRUE) {
     palClearPad(GPIOD, GPIOD_LED1);
     chThdSleepMilliseconds(500);
-    palSetPad(GPIOD, GPIOD_LED);
+    //palSetPad(GPIOD, GPIOD_LED);
     chThdSleepMilliseconds(500);
   }
+
+  return 0;
 }
 
 /*
@@ -68,6 +70,6 @@ int main(void) {
     if (palReadPad(GPIOA, GPIOA_BUTTON))
       TestThread(&SD2);
     chThdSleepMilliseconds(500);
+    */
   }
-  */
 }
