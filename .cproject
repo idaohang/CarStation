@@ -38,18 +38,18 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<folderInfo id="0.527109119.981371861" name="/" resourcePath="ChibiOS">
-						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.829381115" name="No ToolChain" superClass="org.eclipse.cdt.build.core.prefbase.toolchain" unusedChildren="">
-							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.232329815" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs.711311057"/>
-							<tool id="org.eclipse.cdt.build.core.settings.holder.1224989948" name="Assembly" superClass="org.eclipse.cdt.build.core.settings.holder.1834106578"/>
-							<tool id="org.eclipse.cdt.build.core.settings.holder.1814430515" name="UPC" superClass="org.eclipse.cdt.build.core.settings.holder.1772355690"/>
-							<tool id="org.eclipse.cdt.build.core.settings.holder.1844806185" name="LLVM bytecode assembly" superClass="org.eclipse.cdt.build.core.settings.holder.62969295"/>
-							<tool id="org.eclipse.cdt.build.core.settings.holder.1510611185" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder.1009107302"/>
-							<tool id="org.eclipse.cdt.build.core.settings.holder.734851885" name="GNU C" superClass="org.eclipse.cdt.build.core.settings.holder.150959572"/>
+					<folderInfo id="0.527109119.1890207660" name="/" resourcePath="ugfx">
+						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.286838425" name="No ToolChain" superClass="org.eclipse.cdt.build.core.prefbase.toolchain" unusedChildren="">
+							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.2121441527" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs.711311057"/>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.514885358" name="Assembly" superClass="org.eclipse.cdt.build.core.settings.holder.1834106578"/>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.1169290668" name="UPC" superClass="org.eclipse.cdt.build.core.settings.holder.1772355690"/>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.85472740" name="LLVM bytecode assembly" superClass="org.eclipse.cdt.build.core.settings.holder.62969295"/>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.1932656005" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder.1009107302"/>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.1361380838" name="GNU C" superClass="org.eclipse.cdt.build.core.settings.holder.150959572"/>
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="ChibiOS|ugfx" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="ugfx|ChibiOS" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

@@ -18,18 +18,24 @@
 
 // For a multiple display configuration we would put all this in a structure and then
 //	set g->board to that structure.
-#define SSD1306_RESET_PORT		GPIOB
-#define SSD1306_RESET_PIN		5
-#define SSD1306_MISO_PORT		GPIOB
-#define SSD1306_MISO_PIN		8
-#define SSD1306_MOSI_PORT		GPIOB
+#define SSD1306_RESET_PORT		GPIOA
+#define SSD1306_RESET_PIN		6
+// #define SSD1306_MISO_PORT		GPIOB
+// #define SSD1306_MISO_PIN		8
+#define SSD1306_MOSI_PORT		GPIOA
 #define SSD1306_MOSI_PIN		7
-#define SSD1306_SCK_PORT		GPIOB
-#define SSD1306_SCK_PIN			6
-#define SSD1306_CS_PORT			GPIOB
-#define SSD1306_CS_PIN			5
+#define SSD1306_SCK_PORT		GPIOA
+#define SSD1306_SCK_PIN			5
+//#define SSD1306_CS_PORT			GPIOB
+//#define SSD1306_CS_PIN			5
+#define SSD1306_DC_PORT			GPIOA
+#define SSD1306_DC_PIN			4
+
 #define SET_RST					palSetPad(SSD1306_RESET_PORT, SSD1306_RESET_PIN);
 #define CLR_RST					palClearPad(SSD1306_RESET_PORT, SSD1306_RESET_PIN);
+
+#define DATA_DC					palSetPad(SSD1306_DC_PORT, SSD1306_DC_PIN);
+#define COMMAND_DC				palClearPad(SSD1306_DC_PORT, SSD1306_DC_PIN);
 
 /*
  * SPI1 configuration structure.
@@ -39,8 +45,8 @@
 static const SPIConfig spi1config = {
 	NULL,
 	/* HW dependent part.*/
-	SSD1306_MISO_PORT,
-	SSD1306_MISO_PIN,
+	0,			// Can't use SPI cs
+	0,
 	0
 	//SPI_CR1_BR_0
 };
@@ -50,7 +56,6 @@ static const SPIConfig spi1config = {
 #endif
 
 static inline void init_board(GDisplay *g) {
-	unsigned	i;
 
 	// As we are not using multiple displays we set g->board to NULL as we don't use it.
 	g->board = 0;
@@ -58,18 +63,19 @@ static inline void init_board(GDisplay *g) {
 
 	switch(g->controllerdisplay) {
 	case 0:											// Set up for Display 0
-		// RESET pin.
-		palSetPadMode(SSD1306_RESET_PORT, SSD1306_RESET_PIN, PAL_MODE_OUTPUT_PUSHPULL);
-
-		palSetPadMode(SSD1306_MISO_PORT, SSD1306_MISO_PIN, 	PAL_MODE_ALTERNATE(1)|
-															PAL_STM32_OSPEED_HIGHEST);
-		palSetPadMode(SSD1306_MOSI_PORT, SSD1306_MOSI_PIN, 	PAL_MODE_ALTERNATE(1)|
-															PAL_STM32_OSPEED_HIGHEST);
-		palSetPadMode(SSD1306_SCK_PORT,  SSD1306_SCK_PIN,  	PAL_MODE_ALTERNATE(1)|
-															PAL_STM32_OSPEED_HIGHEST);
-		palSetPad(SSD1306_CS_PORT, SSD1306_CS_PIN);
-		palSetPadMode(SSD1306_CS_PORT,   SSD1306_CS_PIN,   	PAL_MODE_ALTERNATE(1)|
-															PAL_STM32_OSPEED_HIGHEST);
+//		// RESET pin.
+//		palSetPadMode(SSD1306_RESET_PORT, SSD1306_RESET_PIN, PAL_MODE_OUTPUT_PUSHPULL);
+//
+//		// 等修改为STM32F系列，原有的GPIO是L系列的。
+//		palSetPadMode(SSD1306_MISO_PORT, SSD1306_MISO_PIN, 	PAL_MODE_ALTERNATE(1)|
+//															PAL_STM32_OSPEED_HIGHEST);
+//		palSetPadMode(SSD1306_MOSI_PORT, SSD1306_MOSI_PIN, 	PAL_MODE_ALTERNATE(1)|
+//															PAL_STM32_OSPEED_HIGHEST);
+//		palSetPadMode(SSD1306_SCK_PORT,  SSD1306_SCK_PIN,  	PAL_MODE_ALTERNATE(1)|
+//															PAL_STM32_OSPEED_HIGHEST);
+//		palSetPad(SSD1306_CS_PORT, SSD1306_CS_PIN);
+//		palSetPadMode(SSD1306_CS_PORT,   SSD1306_CS_PIN,   	PAL_MODE_ALTERNATE(1)|
+//															PAL_STM32_OSPEED_HIGHEST);
 		spiInit();
 		break;
 	}
@@ -111,20 +117,24 @@ static inline void write_cmd(GDisplay *g, uint8_t cmd) {
 	command[0] = 0x00;		// Co = 0, D/C = 0
 	command[1] = cmd;
 
+	COMMAND_DC
+
 	spiStart(&SPID1, &spi1config);
-	spiSelect(&SPID1);
+	//spiSelect(&SPID1);
 	spiStartSend(&SPID1, 2, command);
-	spiUnselect(&SPID1);
+	//spiUnselect(&SPID1);
 	spiStop(&SPID1);
 }
 
 static inline void write_data(GDisplay *g, uint8_t* data, uint16_t length) {
 	(void) g;
 
+	DATA_DC
+
 	spiStart(&SPID1, &spi1config);
-	spiSelect(&SPID1);
+	//spiSelect(&SPID1);
 	spiStartSend(&SPID1, length, data);
-	spiUnselect(&SPID1);
+	//spiUnselect(&SPID1);
 	spiStop(&SPID1);
 }
 
