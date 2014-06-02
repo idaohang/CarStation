@@ -18,13 +18,18 @@
 #define _BOARD_H_
 
 /*
- * Setup for the STMicroelectronics STM3210C-EVAL evaluation board.
+ * Setup for the Chenjianqing's CarStation board.
  */
 
-#define GPIOD_LED1              7
-#define GPIOD_LED2              13
-#define GPIOD_LED3              3
-#define GPIOD_LED4              4
+#define GPIO_LED_INTERNAL_BIT		5
+#define GPIO_LED_INTERNAL_PORT		GPIOC
+
+#define GPIO_LED_RED_BIT			6
+#define GPIO_LED_RED_PORT			GPIOC
+
+#define GPIO_LED_GREEN_BIT			7
+#define GPIO_LED_GREEN_PORT			GPIOC
+
 
 /*
  * Board identifier.
@@ -74,10 +79,22 @@
 /*
  * Port A setup.
  * Everything input except:
+ * PA1 - GPS Enable (output)
+ * PA2 - USART2 TX GPS
+ * PA3 - USART2 RX GPS
+ * PA4 - OLED DC (output)
+ * PA5 - SPI1 SCK OLED
+ * PA6 - OLED RST (output)
+ * PA7 - SPI1 MOSI OLED
+ * PA8 - Bluetooth RESET (output)
+ * PA9 - USART1 TX Bluetooth
+ * PA10- USART1 RX Bluetooth
+ * PA11- Reserve
+ * PA12- Reserve
  */
-#define VAL_GPIOACRL            0x44444444      /*  PA7...PA0 */
-#define VAL_GPIOACRH            0x44444444      /* PA15...PA8 */
-#define VAL_GPIOAODR            0xFFFFFFFF
+#define VAL_GPIOACRL            0xB3B34434      /*  PA7...PA0 */
+#define VAL_GPIOACRH            0x44444443      /* PA15...PA8 */
+#define VAL_GPIOAODR            0xFFFFFEFD		 /* GPS Disable,Bluetooth Disable*/
 
 /*
  * Port B setup.
@@ -91,30 +108,36 @@
  * Port C setup.
  * Everything input except:
  */
-#define VAL_GPIOCCRL            0x44444444      /*  PC7...PC0 */
+#define VAL_GPIOCCRL            0x33344444      /*  PC7...PC0 */
 #define VAL_GPIOCCRH            0x44444444      /* PC15...PC8 */
 #define VAL_GPIOCODR            0xFFFFFFFF
 
 /*
  * Port D setup.
  * Everything input except:
- * PD5 - USART2TX (remapped) AF PP Output
- * PD6 - USART2RX (remapped) Digital Input
- * PD7 - LED (LD1) PP Output
+ * PD5 - LED(Internal)
+ * PD6 - LED(Red)
+ * PD7 - LED(Green)
  */
-
-// PD2 - LED
-#define VAL_GPIODCRL            0x34B33344      /*  PD7...PD0 */
-#define VAL_GPIODCRH            0x44344444      /* PD15...PD8 */
-#define VAL_GPIODODR            0x0000DF67
+#define VAL_GPIODCRL            0x44444444      /*  PD7...PD0 */
+#define VAL_GPIODCRH            0x44444444      /* PD15...PD8 */
+#define VAL_GPIODODR            0xFFFFFFFF
 
 /*
  * Port E setup.
  * Everything input except:
  */
 #define VAL_GPIOECRL            0x44444444      /*  PE7...PE0 */
-#define VAL_GPIOECRH            0x44344444      /* PE15...PE8 */
+#define VAL_GPIOECRH            0x44444444      /* PE15...PE8 */
 #define VAL_GPIOEODR            0xFFFFFFFF
+
+/*
+ * Port F setup.
+ * Everything input except:
+ */
+#define VAL_GPIOFCRL            0x44444444      /*  PF7...PF0 */
+#define VAL_GPIOFCRH            0x44444444      /* PF15...PF8 */
+#define VAL_GPIOFODR            0xFFFFFFFF
 
 #if !defined(_FROM_ASM_)
 #ifdef __cplusplus

@@ -16,6 +16,7 @@
 
 #include "ch.h"
 #include "hal.h"
+#include "gfx.h"
 //#include "test.h"
 
 /*
@@ -27,9 +28,9 @@ static msg_t Thread1(void *arg) {
   (void)arg;
   chRegSetThreadName("blinker");
   while (TRUE) {
-    palClearPad(GPIOD, GPIOD_LED1);
+    palClearPad(GPIO_LED_INTERNAL_PORT, GPIO_LED_INTERNAL_BIT);
     chThdSleepMilliseconds(500);
-    //palSetPad(GPIOD, GPIOD_LED);
+    palSetPad(GPIO_LED_INTERNAL_PORT, GPIO_LED_INTERNAL_BIT);
     chThdSleepMilliseconds(500);
   }
 
@@ -51,6 +52,9 @@ int main(void) {
   halInit();
   chSysInit();
 
+  palClearPad(GPIO_LED_INTERNAL_PORT, GPIO_LED_INTERNAL_BIT);
+  palSetPad(GPIO_LED_INTERNAL_PORT, GPIO_LED_INTERNAL_BIT);
+
   /*
    * Activates the serial driver 2 using the driver default configuration.
    */
@@ -60,6 +64,18 @@ int main(void) {
    * Creates the blinker thread.
    */
   chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
+
+
+  // 测试gfx
+  //gfxInit();
+  //gdispDrawLine(0, 0, 50, 50, 1);
+  //gdispDrawLine(0, 50, 50, 0, 1);
+
+  //gdisp_lld_display();
+
+	while(TRUE) {
+		//gfxSleepMilliseconds(250);
+	}
 
   /*
    * Normal main() thread activity, in this demo it does nothing except
